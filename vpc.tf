@@ -10,8 +10,8 @@ locals {
   available_zones_count = length(data.aws_availability_zones.available.names)
   zone_count      = var.zone_count < local.available_zones_count ? var.zone_count : local.available_zones_count
   range           = cidrsubnets(var.cidr, [for i in range(local.available_zones_count * 2) : 8]...)
-  private_subnets = slice(local.range, 0, local.zone_count)
-  public_subnets  = reverse(slice(reverse(local.range), 0, local.zone_count))
+  private_subnets = slice(local.range, 0, local.zone_count - 1)
+  public_subnets  = reverse(slice(reverse(local.range), 0, local.zone_count - 1))
 }
 
 module "vpc" {
@@ -25,7 +25,5 @@ module "vpc" {
   single_nat_gateway   = true
   enable_dns_hostnames = true
   tags                 = var.tags
-  private_subnet_tags = {
 
-  }
 }
