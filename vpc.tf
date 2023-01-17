@@ -3,6 +3,7 @@ data "aws_availability_zones" "available" {
     name   = "region-name"
     values = [var.region]
   }
+
 }
 
 locals {
@@ -16,7 +17,6 @@ locals {
 module "vpc" {
   source               = "terraform-aws-modules/vpc/aws"
   name                 = var.name
-
   cidr                 = var.cidr
   azs                  = slice(data.aws_availability_zones.available.names, 0, local.zone_count - 1)
   private_subnets      = local.private_subnets
@@ -24,5 +24,8 @@ module "vpc" {
   enable_nat_gateway   = true
   single_nat_gateway   = true
   enable_dns_hostnames = true
-  tags = var.tags
+  tags                 = var.tags
+  private_subnet_tags = {
+
+  }
 }
