@@ -15,7 +15,7 @@ variable "cidr" {
 
 variable "zone_count" {
   description = "Number of availability zones to use"
-  default     = 2
+  default     = 5
 }
 
 variable "tags" {

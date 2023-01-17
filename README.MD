@@ -1,4 +1,3 @@
-<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
@@ -32,9 +31,12 @@
 | <a name="input_name"></a> [name](#input\_name) | VPC name | `string` | n/a | yes |
 | <a name="input_region"></a> [region](#input\_region) | AWS Region | `string` | `"us-east-2"` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | A map of additional tags to add to the vpc | `map(string)` | `{}` | no |
-| <a name="input_zone_count"></a> [zone\_count](#input\_zone\_count) | Number of availability zones to use | `number` | `2` | no |
+| <a name="input_zone_count"></a> [zone\_count](#input\_zone\_count) | Number of availability zones to use | `number` | `5` | no |
 
 ## Outputs
 
-No outputs.
-<!-- END_TF_DOCS -->
+| Name | Description |
+|------|-------------|
+| <a name="output_private_subnets"></a> [private\_subnets](#output\_private\_subnets) | n/a |
+| <a name="output_public_subnets"></a> [public\_subnets](#output\_public\_subnets) | n/a |
+| <a name="output_vpc_id"></a> [vpc\_id](#output\_vpc\_id) | n/a |
