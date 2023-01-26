@@ -15,7 +15,7 @@ variable "cidr" {
 
 variable "zone_count" {
   description = "Number of availability zones to use"
-  default     = 5
+  default     = 2
 }
 
 variable "tags" {
@@ -24,3 +24,14 @@ variable "tags" {
   default     = {}
 }
 
+variable "public_subnet_tags" {
+  description = "A map of additional tags to add to the public subnets"
+  type        = map(string)
+  default     = {}
+}
+
+variable "private_subnet_tags" {
+  description = "A map of additional tags to add to the private subnets"
+  type        = map(string)
+  default     = {}
+}
