@@ -3,9 +3,9 @@ variable "region" {
   default     = "us-east-2"
 }
 
-variable "name" {
+variable "stack" {
   type        = string
-  description = "VPC name"
+  description = "Stack name e.g dev/test/prod"
 }
 
 variable "cidr" {
