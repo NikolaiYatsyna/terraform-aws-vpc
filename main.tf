@@ -16,7 +16,7 @@ locals {
 
 module "vpc" {
   source               = "terraform-aws-modules/vpc/aws"
-  name                 = var.name
+  name                 = "${var.stack}-vpc"
   cidr                 = var.cidr
   azs                  = slice(data.aws_availability_zones.available.names, 0, local.zone_count)
   private_subnets      = local.private_subnets
