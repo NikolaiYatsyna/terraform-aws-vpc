@@ -1,9 +1,3 @@
-provider "aws" {
-  region = var.region
-}
-
-data "aws_availability_zones" "available" {}
-
 locals {
   available_zones_count = length(data.aws_availability_zones.available.names)
   zone_count            = var.zone_count < local.available_zones_count ? var.zone_count : local.available_zones_count
@@ -32,4 +26,5 @@ module "vpc" {
   tags                                 = var.tags
   public_subnet_tags                   = var.public_subnet_tags
   private_subnet_tags                  = var.private_subnet_tags
+  intra_subnet_tags                    = var.intra_subnet_tags
 }
