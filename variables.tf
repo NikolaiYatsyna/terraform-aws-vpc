@@ -1,8 +1,3 @@
-variable "region" {
-  description = "AWS Region"
-  default     = "us-east-2"
-}
-
 variable "stack" {
   type        = string
   description = "Stack name e.g dev/test/prod"
