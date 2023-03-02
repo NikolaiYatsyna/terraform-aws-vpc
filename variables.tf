@@ -18,18 +18,3 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
-
-variable "public_subnet_tags" {
-  description = "A map of additional tags to add to the public subnets"
-  type        = map(string)
-}
-
-variable "private_subnet_tags" {
-  description = "A map of additional tags to add to the private subnets"
-  type        = map(string)
-}
-
-variable "intra_subnet_tags" {
-  description = "A map of additional tags to add to the intra subnets"
-  type        = map(string)
-}
