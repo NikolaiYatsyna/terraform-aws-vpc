@@ -24,7 +24,16 @@ module "vpc" {
   create_flow_log_cloudwatch_iam_role  = true
   create_flow_log_cloudwatch_log_group = true
   tags                                 = var.tags
-  public_subnet_tags                   = var.public_subnet_tags
-  private_subnet_tags                  = var.private_subnet_tags
-  intra_subnet_tags                    = var.intra_subnet_tags
+  public_subnet_tags = merge(
+    { type = "public" },
+    var.tags
+  )
+  private_subnet_tags = merge(
+    { type = "private" },
+    var.tags
+  )
+  intra_subnet_tags = merge(
+    { type = "intra" },
+    var.tags
+  )
 }
