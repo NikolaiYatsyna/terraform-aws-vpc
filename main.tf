@@ -20,7 +20,7 @@ module "vpc" {
   enable_nat_gateway   = true
   enable_dns_hostnames = true
   enable_flow_log      = true
-
+  manage_default_network_acl = false
   create_flow_log_cloudwatch_iam_role  = true
   create_flow_log_cloudwatch_log_group = true
   tags                                 = var.tags
