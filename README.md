@@ -15,45 +15,21 @@ The following IAM policy needs to be attached to the role that is assumed during
     {
       "Effect": "Allow",
       "Action": [
-        "logs:CreateLogGroup"
-      ],
-      "Resource": "arn:aws:logs:***:044964284165:log-group:*"
-    },
-    {
-      "Effect": "Allow",
-      "Action": [
+        "sts:GetCallerIdentity",
         "ec2:DescribeAvailabilityZones",
-        "ec2:DescribeSecurityGroups",
-        "ec2:DescribeRouteTables",
-        "iam:AttachRolePolicy",
-        "iam:CreateRole",
-        "iam:CreatePolicy",
-        "iam:PutRolePolicy"
-      ],
-      "Resource": "*"
-    },
-    {
-      "Effect": "Allow",
-      "Action": [
-        "ec2:CreateVpc",
-        "ec2:CreateTags",
         "ec2:DescribeVpcs",
-        "ec2:DescribeVpcAttribute",
-        "ec2:DeleteVpc",
-        "ec2:ModifyVpcAttribute",
-        "ec2:CreateSubnet",
-        "ec2:CreateRouteTable",
-        "ec2:CreateInternetGateway",
-        "ec2:DeleteSubnet",
-        "ec2:DeleteRouteTable",
-        "ec2:DeleteInternetGateway"
-      ],
-      "Resource": "arn:aws:ec2:***:044964284165:vpc/*"
-    },
-    {
-      "Effect": "Allow",
-      "Action": [
-        "ec2:DescribeVpcs"
+        "ec2:DescribeNetworkAcls",
+        "ec2:DescribeRouteTables",
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeInternetGateways",
+        "ec2:DescribeSecurityGroupRules",
+        "logs:DescribeLogGroups",
+        "ec2:DescribeAddresses",
+        "logs:CreateLogDelivery",
+        "ec2:DescribeFlowLogs",
+        "ec2:DescribeNatGateways",
+        "ec2:DescribeNetworkInterfaces"
       ],
       "Resource": "*"
     },
@@ -61,15 +37,140 @@ The following IAM policy needs to be attached to the role that is assumed during
       "Effect": "Allow",
       "Action": [
         "iam:CreateRole",
-        "iam:CreatePolicy",
         "iam:GetRole",
         "iam:ListRolePolicies",
         "iam:ListAttachedRolePolicies",
+        "iam:AttachRolePolicy",
+        "iam:PassRole",
+        "iam:DetachRolePolicy",
         "iam:ListInstanceProfilesForRole",
-        "iam:DeleteRole",
+        "iam:DeleteRole"
+      ],
+      "Resource": "arn:aws:iam::${AWS::AccountId}:role/vpc-flow-log-role-*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "iam:CreatePolicy",
+        "iam:GetPolicy",
+        "iam:GetPolicyVersion",
+        "iam:ListPolicyVersions",
         "iam:DeletePolicy"
       ],
-      "Resource": "arn:aws:iam::044964284165:role/*"
+      "Resource": "arn:aws:iam::${AWS::AccountId}:policy/vpc-flow-log-to-cloudwatch-*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ec2:ModifyVpcAttribute",
+        "ec2:DescribeVpcAttribute",
+        "ec2:DeleteVpc"
+      ],
+      "Resource": "arn:aws:ec2:*:${AWS::AccountId}:vpc/*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ec2:CreateTags"
+      ],
+      "Resource": [
+        "arn:aws:ec2:*:${AWS::AccountId}:vpc/*",
+        "arn:aws:ec2:*:${AWS::AccountId}:subnet/*",
+        "arn:aws:ec2:*:${AWS::AccountId}:internet-gateway/*",
+        "arn:aws:ec2:*:${AWS::AccountId}:route-table/*",
+        "arn:aws:ec2:*:${AWS::AccountId}:security-group/*",
+        "arn:aws:ec2:*:${AWS::AccountId}:elastic-ip/*",
+        "arn:aws:ec2:*:${AWS::AccountId}:natgateway/*"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ec2:CreateRouteTable",
+        "ec2:CreateRoute",
+        "ec2:DeleteRoute",
+        "ec2:DeleteRouteTable"
+      ],
+      "Resource": [
+        "arn:aws:ec2:*:${AWS::AccountId}:route-table/*"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ec2:CreateInternetGateway",
+        "ec2:DeleteInternetGateway"
+      ],
+      "Resource": "arn:aws:ec2:*:${AWS::AccountId}:internet-gateway/*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ec2:AttachInternetGateway",
+        "ec2:DetachInternetGateway"
+      ],
+      "Resource": [
+        "arn:aws:ec2:*:${AWS::AccountId}:internet-gateway/*",
+        "arn:aws:ec2:*:${AWS::AccountId}:vpc/*"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "logs:CreateLogGroup",
+        "logs:ListTagsLogGroup",
+        "logs:DeleteLogGroup"
+      ],
+      "Resource": "arn:aws:logs:*:${AWS::AccountId}:log-group:/aws/vpc-flow-log/*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ec2:RevokeSecurityGroupIngress",
+        "ec2:RevokeSecurityGroupEgress"
+      ],
+      "Resource": "arn:aws:ec2:*:${AWS::AccountId}:security-group/*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ec2:AssociateRouteTable",
+        "ec2:DisassociateRouteTable"
+      ],
+      "Resource": [
+        "arn:aws:ec2:*:${AWS::AccountId}:route-table/*",
+        "arn:aws:ec2:*:${AWS::AccountId}:subnet/*"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ec2:AllocateAddress",
+        "ec2:ReleaseAddress",
+        "ec2:DisassociateAddress"
+      ],
+      "Resource": "arn:aws:ec2:*:${AWS::AccountId}:elastic-ip/*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ec2:CreateFlowLogs",
+        "ec2:DeleteFlowLogs"
+      ],
+      "Resource": [
+        "arn:aws:ec2:*:${AWS::AccountId}:vpc-flow-log/*"
+      ]
+    },
+
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ec2:CreateNatGateway",
+        "ec2:DeleteNatGateway"
+      ],
+      "Resource": [
+        "arn:aws:ec2:*:${AWS::AccountId}:natgateway/*"
+      ]
     }
   ]
 }
