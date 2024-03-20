@@ -1,5 +1,6 @@
-![ci](https://github.com/MikalaiYatsyna/terraform-aws-vpc/actions/workflows/ci.yml/badge.svg)
-![lint](https://github.com/MikalaiYatsyna/terraform-aws-vpc/actions/workflows/lint.yml/badge.svg)
+![ci](https://github.com/MikalaiYatsyna/terraform-aws-vpc/actions/workflows/ci.yml/badge.svg?branch=master)
+![lint](https://github.com/MikalaiYatsyna/terraform-aws-vpc/actions/workflows/lint.yml/badge.svg?branch=master)
+![sec](https://github.com/MikalaiYatsyna/terraform-aws-vpc/actions/workflows/tfsec.yml/badge.svg?branch=master)
 
 ## Introduction
 This repository hosts a comprehensive set of Terraform scripts designed to effortlessly provision Virtual Private Clouds (VPCs) within the Amazon Web Services (AWS) environment.
