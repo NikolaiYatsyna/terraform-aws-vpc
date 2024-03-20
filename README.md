@@ -1,5 +1,8 @@
+![ci](https://github.com/MikalaiYatsyna/terraform-aws-vpc/actions/workflows/ci.yml/badge.svg)
+![lint](https://github.com/MikalaiYatsyna/terraform-aws-vpc/actions/workflows/lint.yml/badge.svg)
+
 ## Introduction
-Terraform module to AWS VPC
+This repository hosts a comprehensive set of Terraform scripts designed to effortlessly provision Virtual Private Clouds (VPCs) within the Amazon Web Services (AWS) environment.
 
 <!-- BEGIN_TF_DOCS -->
 
@@ -196,7 +199,7 @@ The following IAM policy needs to be attached to the role that is assumed during
 | <a name="input_cidr"></a> [cidr](#input\_cidr) | CIDR range | `string` | `"10.0.0.0/16"` | no |
 | <a name="input_stack"></a> [stack](#input\_stack) | Stack name e.g dev/test/prod | `string` | n/a | yes |
 | <a name="input_tags"></a> [tags](#input\_tags) | A map of additional tags to add to the vpc | `map(string)` | `{}` | no |
-| <a name="input_zone_count"></a> [zone\_count](#input\_zone\_count) | Number of availability zones to use | `number` | `2` | no |
+| <a name="input_zone_count"></a> [zone\_count](#input\_zone\_count) | Number of availability zones to use | `string` | `2` | no |
 
 
 ## Resources
