@@ -16,7 +16,8 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.ref }}
 
-      - name: Setup TfSec
-        uses: aquasecurity/tfsec-action@v1.0.0
+      - name: Run TfSec
+        uses: aquasecurity/tfsec-pr-commenter-action@v1.2.0
         with:
           soft_fail: true
+          github_token: ${{ github.token }}
