@@ -171,7 +171,10 @@ The following IAM policy needs to be attached to the role that is assumed during
         "ec2:ReleaseAddress",
         "ec2:DisassociateAddress"
       ],
-      "Resource": "arn:aws:ec2:*:${AWS::AccountId}:elastic-ip/*",
+      "Resource": [
+        "arn:aws:ec2:*:${AWS::AccountId}:elastic-ip/*",
+        "arn:aws:ec2:*:${AWS::AccountId}:*/*"
+      ],
       "Effect": "Allow"
     },
     {
