@@ -17,7 +17,6 @@ The following IAM policy needs to be attached to the role that is assumed during
   "Version": "2012-10-17",
   "Statement": [
     {
-      "Effect": "Allow",
       "Action": [
         "sts:GetCallerIdentity",
         "ec2:DescribeAvailabilityZones",
@@ -35,10 +34,10 @@ The following IAM policy needs to be attached to the role that is assumed during
         "ec2:DescribeNatGateways",
         "ec2:DescribeNetworkInterfaces"
       ],
-      "Resource": "*"
+      "Resource": "*",
+      "Effect": "Allow"
     },
     {
-      "Effect": "Allow",
       "Action": [
         "iam:CreateRole",
         "iam:GetRole",
@@ -50,10 +49,10 @@ The following IAM policy needs to be attached to the role that is assumed during
         "iam:ListInstanceProfilesForRole",
         "iam:DeleteRole"
       ],
-      "Resource": "arn:aws:iam::${AWS::AccountId}:role/vpc-flow-log-role-*"
+      "Resource": "arn:aws:iam::${AWS::AccountId}:role/vpc-flow-log-role-*",
+      "Effect": "Allow"
     },
     {
-      "Effect": "Allow",
       "Action": [
         "iam:CreatePolicy",
         "iam:GetPolicy",
@@ -61,19 +60,42 @@ The following IAM policy needs to be attached to the role that is assumed during
         "iam:ListPolicyVersions",
         "iam:DeletePolicy"
       ],
-      "Resource": "arn:aws:iam::${AWS::AccountId}:policy/vpc-flow-log-to-cloudwatch-*"
+      "Resource": "arn:aws:iam::${AWS::AccountId}:policy/vpc-flow-log-to-cloudwatch-*",
+      "Effect": "Allow"
     },
     {
-      "Effect": "Allow",
       "Action": [
+        "ec2:CreateVpc",
         "ec2:ModifyVpcAttribute",
         "ec2:DescribeVpcAttribute",
         "ec2:DeleteVpc"
       ],
-      "Resource": "arn:aws:ec2:*:${AWS::AccountId}:vpc/*"
+      "Resource": "arn:aws:ec2:*:${AWS::AccountId}:vpc/*",
+      "Effect": "Allow"
     },
     {
-      "Effect": "Allow",
+      "Action": [
+        "ec2:CreateSubnet",
+        "ec2:DeleteSubnet"
+      ],
+      "Resource": [
+        "arn:aws:ec2:*:${AWS::AccountId}:vpc/*",
+        "arn:aws:ec2:*:${AWS::AccountId}:subnet/*"
+      ],
+      "Effect": "Allow"
+    },
+    {
+      "Action": [
+        "ec2:CreateRouteTable",
+        "ec2:DeleteRouteTable"
+      ],
+      "Resource": [
+        "arn:aws:ec2:*:${AWS::AccountId}:vpc/*",
+        "arn:aws:ec2:*:${AWS::AccountId}:route-table/*"
+      ],
+      "Effect": "Allow"
+    },
+    {
       "Action": [
         "ec2:CreateTags"
       ],
@@ -85,10 +107,10 @@ The following IAM policy needs to be attached to the role that is assumed during
         "arn:aws:ec2:*:${AWS::AccountId}:security-group/*",
         "arn:aws:ec2:*:${AWS::AccountId}:elastic-ip/*",
         "arn:aws:ec2:*:${AWS::AccountId}:natgateway/*"
-      ]
+      ],
+      "Effect": "Allow"
     },
     {
-      "Effect": "Allow",
       "Action": [
         "ec2:CreateRouteTable",
         "ec2:CreateRoute",
@@ -97,18 +119,18 @@ The following IAM policy needs to be attached to the role that is assumed during
       ],
       "Resource": [
         "arn:aws:ec2:*:${AWS::AccountId}:route-table/*"
-      ]
+      ],
+      "Effect": "Allow"
     },
     {
-      "Effect": "Allow",
       "Action": [
         "ec2:CreateInternetGateway",
         "ec2:DeleteInternetGateway"
       ],
-      "Resource": "arn:aws:ec2:*:${AWS::AccountId}:internet-gateway/*"
+      "Resource": "arn:aws:ec2:*:${AWS::AccountId}:internet-gateway/*",
+      "Effect": "Allow"
     },
     {
-      "Effect": "Allow",
       "Action": [
         "ec2:AttachInternetGateway",
         "ec2:DetachInternetGateway"
@@ -116,27 +138,27 @@ The following IAM policy needs to be attached to the role that is assumed during
       "Resource": [
         "arn:aws:ec2:*:${AWS::AccountId}:internet-gateway/*",
         "arn:aws:ec2:*:${AWS::AccountId}:vpc/*"
-      ]
+      ],
+      "Effect": "Allow"
     },
     {
-      "Effect": "Allow",
       "Action": [
         "logs:CreateLogGroup",
         "logs:ListTagsLogGroup",
         "logs:DeleteLogGroup"
       ],
-      "Resource": "arn:aws:logs:*:${AWS::AccountId}:log-group:/aws/vpc-flow-log/*"
+      "Resource": "arn:aws:logs:*:${AWS::AccountId}:log-group:/aws/vpc-flow-log/*",
+      "Effect": "Allow"
     },
     {
-      "Effect": "Allow",
       "Action": [
         "ec2:RevokeSecurityGroupIngress",
         "ec2:RevokeSecurityGroupEgress"
       ],
-      "Resource": "arn:aws:ec2:*:${AWS::AccountId}:security-group/*"
+      "Resource": "arn:aws:ec2:*:${AWS::AccountId}:security-group/*",
+      "Effect": "Allow"
     },
     {
-      "Effect": "Allow",
       "Action": [
         "ec2:AssociateRouteTable",
         "ec2:DisassociateRouteTable"
@@ -144,37 +166,42 @@ The following IAM policy needs to be attached to the role that is assumed during
       "Resource": [
         "arn:aws:ec2:*:${AWS::AccountId}:route-table/*",
         "arn:aws:ec2:*:${AWS::AccountId}:subnet/*"
-      ]
+      ],
+      "Effect": "Allow"
     },
     {
-      "Effect": "Allow",
       "Action": [
         "ec2:AllocateAddress",
         "ec2:ReleaseAddress",
         "ec2:DisassociateAddress"
       ],
-      "Resource": "arn:aws:ec2:*:${AWS::AccountId}:elastic-ip/*"
+      "Resource": [
+        "arn:aws:ec2:*:${AWS::AccountId}:elastic-ip/*",
+        "arn:aws:ec2:*:${AWS::AccountId}:*/*"
+      ],
+      "Effect": "Allow"
     },
     {
-      "Effect": "Allow",
       "Action": [
         "ec2:CreateFlowLogs",
         "ec2:DeleteFlowLogs"
       ],
       "Resource": [
-        "arn:aws:ec2:*:${AWS::AccountId}:vpc-flow-log/*"
-      ]
+        "arn:aws:ec2:*:${AWS::AccountId}:vpc-flow-log/*",
+        "arn:aws:ec2:*:${AWS::AccountId}:vpc/*"
+      ],
+      "Effect": "Allow"
     },
-
     {
-      "Effect": "Allow",
       "Action": [
         "ec2:CreateNatGateway",
         "ec2:DeleteNatGateway"
       ],
       "Resource": [
-        "arn:aws:ec2:*:${AWS::AccountId}:natgateway/*"
-      ]
+        "arn:aws:ec2:*:${AWS::AccountId}:natgateway/*",
+        "arn:aws:ec2:*:${AWS::AccountId}:elastic-ip/*"
+      ],
+      "Effect": "Allow"
     }
   ]
 }
