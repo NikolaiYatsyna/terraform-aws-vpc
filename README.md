@@ -32,7 +32,9 @@ The following IAM policy needs to be attached to the role that is assumed during
         "logs:CreateLogDelivery",
         "ec2:DescribeFlowLogs",
         "ec2:DescribeNatGateways",
-        "ec2:DescribeNetworkInterfaces"
+        "ec2:DescribeNetworkInterfaces",
+        "ec2:DescribeAddressesAttribute",
+        "logs:ListTagsForResource"
       ],
       "Resource": "*",
       "Effect": "Allow"
