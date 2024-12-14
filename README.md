@@ -201,7 +201,8 @@ The following IAM policy needs to be attached to the role that is assumed during
       ],
       "Resource": [
         "arn:aws:ec2:*:${AWS::AccountId}:natgateway/*",
-        "arn:aws:ec2:*:${AWS::AccountId}:elastic-ip/*"
+        "arn:aws:ec2:*:${AWS::AccountId}:elastic-ip/*",
+        "arn:aws:ec2:*:${AWS::AccountId}:subnet/subnet-*"
       ],
       "Effect": "Allow"
     }
