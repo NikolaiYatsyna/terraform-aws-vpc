@@ -214,7 +214,7 @@ The following IAM policy needs to be attached to the role that is assumed during
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.82.1 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.82.2 |
 ## Outputs
 
 | Name | Description |
